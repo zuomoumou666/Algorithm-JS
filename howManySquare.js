@@ -18,5 +18,5 @@ function getAmount2(len) {
   }
   return arr[len - 1];
 }
-  bfffg
+
 console.log(getAmount2(len));
