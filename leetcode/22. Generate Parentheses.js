@@ -19,14 +19,21 @@
 // var generateParenthesis = function (n) {
 //   if (n <= 0) return null;
 //   let result = ['()'];
+//   let memory = { '()': true };
 //   if (n === 1) return result;
 //   for (let i = 2; i <= n; i++) {
 //     let tempResult = [];
 //     for (let j = 0; j < result.length; j++) {
 //       const splitArr = split(result[j]);
-//       tempResult = tempResult.concat(insertOne(splitArr));
+//       const insertResult = insertOne(splitArr);
+//       insertResult.forEach(iR => {
+//         if (!memory[iR]) {
+//           tempResult.push(iR);
+//           memory[iR] = true;
+//         }
+//       });
 //     }
-//     result = [...new Set(tempResult)];
+//     result = tempResult;
 //   }
 //   return result;
 // }
@@ -90,38 +97,51 @@
 
 
 
-var generateParenthesis = function (n) {
-  if (n <= 0) return null;
-  if (n === 1) return ['()'];
-  let result = ['(', ')'];
-  for (let i = 1; i < n * 2; i++) {
-    const tempResult = [];
-    for (let j = 0; j < result.length; j++) {
-      tempResult.push(`${result[j]}(`, `${result[j]})`);
-    }
-    result = tempResult;
-  }
-  result = [...new Set(result)];
-  return result.filter(r => isValid(r));
-}
+// var generateParenthesis = function (n) {
+//   if (n <= 0) return null;
+//   if (n === 1) return ['()'];
+//   let result = ['(', ')'];
+//   for (let i = 1; i < n * 2; i++) {
+//     const tempResult = [];
+//     for (let j = 0; j < result.length; j++) {
+//       tempResult.push(`${result[j]}(`, `${result[j]})`);
+//     }
+//     result = tempResult;
+//   }
+//   return result.filter(r => isValid(r));
+// }
 
-function isValid(str) {
-  if (str.length % 2 !== 0 || str[0] !== '(') return false;
-  const arr = [];
-  let left = 0;
-  for (let i = 0; i < str.length; i++) {
-    if (str[i] === '(') {
-      arr.push(')');
-      left++;
-      if (left > str.length / 2) return false;
-    } else {
-      const cur = arr.pop();
-      if (!cur) return false;
-    }
-  }
-  return true;
-}
+// function isValid(str) {
+//   if (str.length % 2 !== 0 || str[0] !== '(') return false;
+//   const arr = [];
+//   let left = 0;
+//   for (let i = 0; i < str.length; i++) {
+//     if (str[i] === '(') {
+//       arr.push(')');
+//       left++;
+//       if (left > str.length / 2) return false;
+//     } else {
+//       const cur = arr.pop();
+//       if (!cur) return false;
+//     }
+//   }
+//   return true;
+// }
 
 // console.log(isValid('(('));
+
+
+var generateParenthesis = function (n) {
+  var arr = [];
+  compose(n, n, '');
+  return arr;
+
+  function compose(left, right, str) {
+    if (!left && !right && str.length) return arr.push(str);
+    if (left) compose(left - 1, right, str + '(');
+    if (right > left) compose(left, right - 1, str + ')');
+  }
+};
+
 const test = generateParenthesis(3);
 console.log(test);
