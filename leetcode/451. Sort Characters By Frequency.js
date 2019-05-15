@@ -65,7 +65,26 @@ var frequencySort = function (s) {
   return string;
 };
 
+
+var frequencySort = function (s) {
+  if (!s) return s;
+  const memory = {};
+  const arr = s.split('');
+  for (let i = 0; i < s.length; i++) {
+    const curS = s[i]
+    memory[curS] = memory[curS] ? memory[curS] + 1 : 1;
+  }
+  arr.sort((a, b) => {
+    const result = memory[b] - memory[a];
+    if (result === 0) return b.charCodeAt(0) - a.charCodeAt(0);
+    // if (result === 0) return a.charCodeAt(0) - b.charCodeAt(0);
+    return memory[b] - memory[a];
+  })
+  return arr.join('');
+};
+
+const input = "loveleetcode";
 // const input = 'tree';
 // const input = 'cccaaa';
-const input = 'Aabb';
+// const input = 'Aabb';
 console.log(frequencySort(input));
