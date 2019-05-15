@@ -78,7 +78,7 @@ var frequencySort = function (s) {
     const result = memory[b] - memory[a];
     if (result === 0) return b.charCodeAt(0) - a.charCodeAt(0);
     // if (result === 0) return a.charCodeAt(0) - b.charCodeAt(0);
-    return memory[b] - memory[a];
+    return result;
   })
   return arr.join('');
 };
