@@ -58,6 +58,23 @@ var validMountainArray = function (A) {
   return status === 'down' && flag;
 };
 
+var validMountainArray = function (A) {
+  if (!A || !A.length) return false;
+  const len = A.length;
+  if (len > 10000 || len < 3) return false;
+  let i = 0;
+  while (i < len - 1 && A[i] < A[i + 1]) {
+    i++;
+  }
+  if (A[i] === A[i + 1] || i === len - 1 || i === 0) return false;
+  while (i < len - 1 && A[i] > A[i + 1]) {
+    i++;
+  }
+
+  return i === len - 1;
+};
+
+// const input = [1, 2, 1];
 // const input = [3, 5, 5];
 // const input = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 const input = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
