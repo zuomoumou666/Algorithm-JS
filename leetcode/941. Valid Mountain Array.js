@@ -66,7 +66,7 @@ var validMountainArray = function (A) {
   while (i < len - 1 && A[i] < A[i + 1]) {
     i++;
   }
-  if (A[i] === A[i + 1] || i === len - 1 || i === 0) return false;
+  if (i === len - 1 || i === 0) return false;
   while (i < len - 1 && A[i] > A[i + 1]) {
     i++;
   }
