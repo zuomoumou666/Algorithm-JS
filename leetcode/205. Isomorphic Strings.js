@@ -26,6 +26,22 @@
  * @param {string} t
  * @return {boolean}
  */
+// var isIsomorphic = function (s, t) {
+//   const lenS = s.length;
+//   const lenT = t.length;
+//   if (lenS !== lenT) return false;
+//   const hashS = {};
+//   const hashT = {};
+//   for (let i = 0; i < lenS; i++) {
+//     const curS = s[i];
+//     const curT = t[i];
+//     hashS[curS] = hashS[curS] === undefined ? i : hashS[curS];
+//     hashT[curT] = hashT[curT] === undefined ? i : hashT[curT];
+//     if (hashS[curS] !== hashT[curT]) return false;
+//   }
+//   return true;
+// };
+
 var isIsomorphic = function (s, t) {
   const lenS = s.length;
   const lenT = t.length;
@@ -35,15 +51,18 @@ var isIsomorphic = function (s, t) {
   for (let i = 0; i < lenS; i++) {
     const curS = s[i];
     const curT = t[i];
-    hashS[curS] = hashS[curS] === undefined ? i : hashS[curS];
-    hashT[curT] = hashT[curT] === undefined ? i : hashT[curT];
-    if (hashS[curS] !== hashT[curT]) return false;
+    if (!hashS[curS] && !hashT[curT]) {
+      hashS[curS] = curT;
+      hashT[curT] = curS;
+    } else if (hashS[curS] !== curT) {
+      return false;
+    }
   }
   return true;
 };
 
 // const s = "aa", t = "ab";
-// const s = "ab", t = "aa";
+const s = "ab", t = "aa";
 // const s = "abacd", t = "aaaaa";
-const s = "egg", t = "add";
+// const s = "egg", t = "add";
 console.log(isIsomorphic(s, t));
