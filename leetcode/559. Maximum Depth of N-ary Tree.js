@@ -32,30 +32,28 @@
  * @param {Node} root
  * @return {number}
  */
-var maxDepth = function (root) {
-  let amount = 1;
-  let deep = 0;
-  let curLevelLen = 1;
-  let nexLevelLen = 0;
-  let arr = [root];
-  if (!root) return 0;
-  if (!root.children || root.children.length === 0) return 1;
-  while (arr.length) {
-    const curNode = arr.shift();
-    curLevelLen--;
-    amount++;
-    if (curNode.children && curNode.children.length > 0) {
-      nexLevelLen += curNode.children.length;
-      arr = arr.concat(curNode.children);
-    }
-    if (curLevelLen === 0) {
-      deep++;
-      curLevelLen = nexLevelLen;
-      nexLevelLen = 0;
-    }
-  }
-  return deep;
-};
+// var maxDepth = function (root) {
+//   let deep = 0;
+//   let curLevelLen = 1;
+//   let nexLevelLen = 0;
+//   let arr = [root];
+//   if (!root) return 0;
+//   if (!root.children || root.children.length === 0) return 1;
+//   while (arr.length) {
+//     const curNode = arr.shift();
+//     curLevelLen--;
+//     if (curNode.children && curNode.children.length > 0) {
+//       nexLevelLen += curNode.children.length;
+//       arr = arr.concat(curNode.children);
+//     }
+//     if (curLevelLen === 0) {
+//       deep++;
+//       curLevelLen = nexLevelLen;
+//       nexLevelLen = 0;
+//     }
+//   }
+//   return deep;
+// };
 // const data = {
 //   "$id": "1",
 //   "children": [
@@ -88,6 +86,18 @@ var maxDepth = function (root) {
 // }
 
 
+var maxDepth = function (root) {
+  let deep = 0;
+  const levelOrder = (node, level = 1) => {
+    if (!node) return;
+    if (level > deep) deep = level;
+    node.children.forEach(n => levelOrder(n, level + 1));
+  }
+  levelOrder(root);
+
+  return deep;
+};
+
 const data = {
   "$id": "1",
   "children": [
@@ -105,3 +115,4 @@ const data = {
 }
 
 console.log(maxDepth(data));
+
