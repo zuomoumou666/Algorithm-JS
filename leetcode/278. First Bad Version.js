@@ -35,39 +35,28 @@ var solution = function (isBadVersion) {
    * @param {integer} n Total versions
    * @return {integer} The first bad version
    */
-  function getMid(min, max) {
-    let mid = parseInt((max + min) / 2);
-    return mid;
-  }
-
   return function (n) {
-    let result = null;
-    if (n === 1) return 1;
     let min = 1;
     let max = n;
-    let mid = getMid(min, max);
-    while (!result && mid <= n && mid > 0) {
+    while (min < max) {
+      const mid = parseInt((min + max) / 2);
       if (isBadVersion(mid)) {
         if (mid === min) return mid;
         max = mid
-        mid = getMid(min, max);
       } else {
         if (isBadVersion(mid + 1)) {
-          result = mid + 1;
+          return mid + 1;
         } else {
           min = mid;
-          mid = getMid(mid, max);
         }
       }
     }
-    return result;
+    return min;
   };
 };
 
-const num = 100
-// const num = 2126753390
-const bad = 54;
-// const bad = 1702766719;
+const num = 2
+const bad = 1;
 const isBadVersion = function (version) {
   return version >= bad;
 };
@@ -75,3 +64,5 @@ const isBadVersion = function (version) {
 const fn = solution(isBadVersion);
 
 console.log(fn(num));
+
+
