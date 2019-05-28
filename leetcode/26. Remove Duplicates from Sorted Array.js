@@ -39,16 +39,26 @@
  * @param {number[]} nums
  * @return {number}
  */
+// var removeDuplicates = function (nums) {
+//   if (!nums.length) return false;
+//   let cur = nums[0];
+//   for (let i = 1, len = nums.length; i < len; i++) {
+//     if (cur === nums[i]) {
+//       cur = nums.splice(i, 1)[0];
+//       i--;
+//       len--;
+//     } else {
+//       cur = nums[i];
+//     }
+//   }
+// };
+
 var removeDuplicates = function (nums) {
   if (!nums.length) return false;
-  let cur = nums[0];
-  for (let i = 1, len = nums.length; i < len; i++) {
-    if (cur === nums[i]) {
-      cur = nums.splice(i, 1)[0];
+  for (let i = 0; i < nums.length; i++) {
+    if (nums[i] === nums[i + 1]) {
+      nums.splice(i, 1);
       i--;
-      len--;
-    } else {
-      cur = nums[i];
     }
   }
 };
