@@ -22,13 +22,13 @@
  */
 var longestCommonPrefix = function (strs) {
   if (!strs.length) return '';
-  const arr = strs[0].split("");
+  let arr = strs[0].split("");
   for (let i = 1, len = strs.length; i < len; i++) {
     const str = strs[i];
     if (arr.length) {
       for (let j = 0, jLen = arr.length; j < jLen; j++) {
         if (str[j] !== arr[j]) {
-          arr.slice(j, jLen);
+          arr = arr.slice(0, j);
           break;
         }
       }
@@ -38,3 +38,7 @@ var longestCommonPrefix = function (strs) {
   }
   return arr.join("");
 };
+
+const ipt = ["flower", "flow", "flight"];
+
+console.log(longestCommonPrefix(ipt));
