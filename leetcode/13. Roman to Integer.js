@@ -100,6 +100,6 @@ var romanToInt = function (s) {
 // const ipt = "IV"
 // const ipt = "MCMXCIV"
 // const ipt = "LVIII"
-const ipt = "IX"
+// const ipt = "IX"
 // const ipt = "III"
 console.log(romanToInt(ipt));
