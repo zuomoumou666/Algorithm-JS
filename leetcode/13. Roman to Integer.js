@@ -46,30 +46,35 @@
  * @param {string} s
  * @return {number}
  */
+// var romanToInt = function (s) {
+//   const hash = {
+//     I: 1,
+//     V: 5,
+//     X: 10,
+//     L: 50,
+//     C: 100,
+//     D: 500,
+//     M: 1000,
+//   };
+//   let result = 0;
+//   for (let i = 0, len = s.length; i < len; i++) {
+//     const cur = hash[s[i]];
+//     let next = hash[s[i + 1]];
+//     let vul = cur;
+//     while (next && next >= cur) {
+//       if (next === cur) {
+//         vul += next;
+//       }
+//       if (next > cur) {
+//         vul = next - vul;
+//       }
+//       next = hash[s[++i + 1]];
+//     }
+//     result += vul;
+//   }
+//   return result;
+// };
 var romanToInt = function (s) {
-  const arr = [
-    {
-      I: 1
-    },
-    {
-      V: 5
-    },
-    {
-      X: 10
-    },
-    {
-      L: 50
-    },
-    {
-      C: 100
-    },
-    {
-      D: 500
-    },
-    {
-      M: 1000
-    },
-  ];
   const hash = {
     I: 1,
     V: 5,
@@ -80,26 +85,21 @@ var romanToInt = function (s) {
     M: 1000,
   };
   let result = 0;
-  for (let i = 0, len = s.length; i < len; i++) {
+  let pre = 0;
+  for (let i = s.length - 1; i >= 0; i--) {
     const cur = hash[s[i]];
-    let next = hash[s[i + 1]];
-    let vul = cur;
-    while (next && next >= cur) {
-      if (next === cur) {
-        vul += next;
-      }
-      if (next > cur) {
-        vul = next - vul;
-      }
-      next = hash[s[++i + 1]];
+    if (pre > cur) {
+      result -= cur;
+    } else {
+      result += cur;
     }
-    result += vul;
+    pre = cur;
   }
   return result;
 };
 // const ipt = "IV"
-const ipt = "MCMXCIV"
+// const ipt = "MCMXCIV"
 // const ipt = "LVIII"
-// const ipt = "IX"
+const ipt = "IX"
 // const ipt = "III"
 console.log(romanToInt(ipt));
