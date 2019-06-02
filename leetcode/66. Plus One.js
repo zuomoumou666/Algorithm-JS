@@ -22,30 +22,45 @@
  * @return {number[]}
  */
 var plusOne = function (digits) {
-  let result = [];
   if (!digits.length) return result;
-  let plus = true;
-
-  let last = digits.pop();
-  while (last !== undefined) {
-    let num = last
-    if (plus) {
-      num = num == 9 ? 0 : num + 1
-      plus = num === 0;
-    }
-    result = [num].concat(result);
-    last = digits.pop();
-    if (last === undefined && num === 0) {
-      result = [1].concat(result);
+  for (let i = digits.length - 1; i >= 0; i--) {
+    digits[i]++;
+    if (digits[i] > 9) {
+      digits[i] = 0;
+    } else {
+      return digits;
     }
   }
-  return result;
+  digits.unshift(1);
+  return digits;
 };
+// var plusOne = function (digits) {
+//   let result = [];
+//   if (!digits.length) return result;
+//   let plus = true;
 
-const ipt = [6, 1, 4, 5, 3, 9, 0, 1, 9, 5, 1, 8, 6, 7, 0, 5, 5, 4, 3];
+//   let last = digits.pop();
+//   while (last !== undefined) {
+//     let num = last
+//     if (plus) {
+//       num = num == 9 ? 0 : num + 1
+//       plus = num === 0;
+//     }
+//     result = [num].concat(result);
+//     last = digits.pop();
+//     if (last === undefined && num === 0) {
+//       result = [1].concat(result);
+//     }
+//   }
+//   return result;
+// };
+
+
+
+// const ipt = [6, 1, 4, 5, 3, 9, 0, 1, 9, 5, 1, 8, 6, 7, 0, 5, 5, 4, 3];
 // const ipt = [4, 3, 2, 9];
 // const ipt = [4, 3, 2, 1];
-// const ipt = [9];
+const ipt = [9];
 
 const result = plusOne(ipt);
 console.log(result);
