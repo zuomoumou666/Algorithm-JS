@@ -47,7 +47,7 @@ var isValid = function (s) {
       arr.push(hash[cur]);
     } else {
       const last = arr.pop();
-      if (!last || last !== cur) {
+      if (last !== cur) {
         return false;
       }
     }
@@ -56,11 +56,11 @@ var isValid = function (s) {
 };
 
 // const ipt = '()';
-// const ipt = '()[]{}';
+const ipt = '()[]{}';
 // const ipt = "(]";
 // const ipt = "([)]";
 // const ipt = "{[]}";
 // const ipt = "";
 // const ipt = "((";
-const ipt = "))";
+// const ipt = "))";
 console.log(isValid(ipt));
