@@ -22,29 +22,70 @@
  * @param {number} n
  * @return {void} Do not return anything, modify nums1 in-place instead.
  */
+
+// var merge = function (nums1, m, nums2, n) {
+//   let i = 0;
+//   let j = 0;
+//   for (i; i < m + n; i++) {
+//     let n1 = nums1[i];
+//     let n2 = nums2[j];
+//     n1 = i - j >= m ? Infinity : n1;
+//     if (n2 < n1) {
+//       nums1.pop();
+//       nums1.splice(i, 0, nums2[j]);
+//       j++;
+//     }
+//   }
+//   return nums1;
+// };
+// var merge = function (nums1, m, nums2, n) {
+//   let i = 0;
+//   let j = 0;
+//   let cur = null;
+//   const result = [];
+//   while (cur !== undefined && i + j < m + n) {
+//     let n1 = i < m ? nums1[i] : Infinity;
+//     let n2 = j < n ? nums2[j] : Infinity;
+//     cur = Math.min(n1, n2);
+//     result.push(cur);
+//     if (n1 <= n2) {
+//       i++;
+//     } else {
+//       j++;
+//     }
+//   }
+//   return result;
+// };
 var merge = function (nums1, m, nums2, n) {
-  let i = 0;
-  let j = 0;
-  let cur = null;
-  let result = [];
-  while (cur !== undefined && i + j < m + n) {
-    let n1 = i < m ? nums1[i] : Infinity;
-    let n2 = j < n ? nums2[j] : Infinity;
-    cur = Math.min(n1, n2);
-    result.push(cur);
-    if (n1 <= n2) {
-      i++;
+  let i = m - 1;
+  let j = n - 1;
+  let num = m + n - 1;
+  while (i >= 0 && j >= 0) {
+    if (nums1[i] <= nums2[j]) {
+      nums1[num--] = nums2[j--];
     } else {
-      j++;
+      nums1[num--] = nums1[i--];
     }
   }
-  return result;
+  while (j >= 0) {
+    nums1[num--] = nums2[j--];
+  }
+  return nums1;
 };
 
-const nums1 = [1, 2, 3, 0, 0, 0];
-const m = 3;
-const nums2 = [2, 5, 6];
-const n = 3;
+const nums1 = [0];
+const m = 0;
+const nums2 = [1];
+const n = 1;
+
+// const nums1 = [1, 2, 3, 0, 0, 0];
+// const m = 3;
+// const nums2 = [2, 5, 6];
+// const n = 3;
+// const nums1 = [1, 2, 3, 0, 0, 0];
+// const m = 3;
+// const nums2 = [2, 5, 6];
+// const n = 3;
 
 
 const result = merge(nums1, m, nums2, n);
