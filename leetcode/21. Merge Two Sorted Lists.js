@@ -21,39 +21,42 @@
  * @return {ListNode}
  */
 var mergeTwoLists = function (l1, l2) {
-  let l3 = null;
-  let cur1 = l1;
-  let cur2 = l2;
-  let cur3 = l3;
-  while (cur1 || cur2) {
-    let min = null;
-    if (cur1 === null || cur2 === null) {
-      min = cur1 || cur2;
-      if (cur1) {
-        cur1 = cur1.next;
-      } else {
-        cur2 = cur2.next;
-      }
+  let l3 = { next: null };
+  let crt = l3;
+  while (l1 && l2) {
+    if (l1.val < l2.val) {
+      crt.next = l1;
+      l1 = l1.next;
     } else {
-      if (cur1.val < cur2.val) {
-        min = cur1;
-        cur1 = cur1.next;
-      } else {
-        min = cur2;
-        cur2 = cur2.next;
-      }
+      crt.next = l2;
+      l2 = l2.next;
     }
-    if (cur3) {
-      cur3.next = min;
-      cur3 = cur3.next;
-    } else {
-      l3 = cur3 = min;
-    }
-    min.next = null;
+    crt = crt.next;
   }
-  return l3;
+  crt.next = l2 || l1;
+  return l3.next;
 };
 
+
+// var mergeTwoLists = function (l1, l2) {
+//   let l3 = null;
+//   let crt = null;
+//   while (l1 && l2) {
+//     if (l1.val < l2.val) {
+//       crt = l1;
+//       l1 = l1.next;
+//     } else {
+//       crt = l2;
+//       l2 = l2.next;
+//     }
+//     if (crt) {
+//       crt.next = crt;
+//     } else {
+//       l3 = crt;
+//     }
+//   }
+//   return l3;
+// };
 
 const ipt1 = {
   val: 1,
@@ -69,11 +72,28 @@ const ipt2 = {
   val: 1,
   next: {
     val: 3,
-    next: {
-      val: 4,
-      next: null
-    }
+    next: null
   }
 }
+// const ipt1 = {
+//   val: 1,
+//   next: {
+//     val: 2,
+//     next: {
+//       val: 4,
+//       next: null
+//     }
+//   }
+// }
+// const ipt2 = {
+//   val: 1,
+//   next: {
+//     val: 3,
+//     next: {
+//       val: 4,
+//       next: null
+//     }
+//   }
+// }
 const result = mergeTwoLists(ipt1, ipt2);
 console.log(JSON.stringify(result));
