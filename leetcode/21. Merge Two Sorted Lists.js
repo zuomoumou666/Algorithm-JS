@@ -20,43 +20,34 @@
  * @param {ListNode} l2
  * @return {ListNode}
  */
+// var mergeTwoLists = function (l1, l2) {
+//   let l3 = { next: null };
+//   let crt = l3;
+//   while (l1 && l2) {
+//     if (l1.val < l2.val) {
+//       crt.next = l1;
+//       l1 = l1.next;
+//     } else {
+//       crt.next = l2;
+//       l2 = l2.next;
+//     }
+//     crt = crt.next;
+//   }
+//   crt.next = l2 || l1;
+//   return l3.next;
+// };
 var mergeTwoLists = function (l1, l2) {
-  let l3 = { next: null };
-  let crt = l3;
-  while (l1 && l2) {
-    if (l1.val < l2.val) {
-      crt.next = l1;
-      l1 = l1.next;
-    } else {
-      crt.next = l2;
-      l2 = l2.next;
-    }
-    crt = crt.next;
+  if (!l1 || !l2) return l1 || l2;
+  if (l1.val <= l2.val) {
+    l1.next = mergeTwoLists(l1.next, l2);
+    return l1;
+  } else {
+    l2.next = mergeTwoLists(l1, l2.next);
+    return l2;
   }
-  crt.next = l2 || l1;
-  return l3.next;
 };
 
 
-// var mergeTwoLists = function (l1, l2) {
-//   let l3 = null;
-//   let crt = null;
-//   while (l1 && l2) {
-//     if (l1.val < l2.val) {
-//       crt = l1;
-//       l1 = l1.next;
-//     } else {
-//       crt = l2;
-//       l2 = l2.next;
-//     }
-//     if (crt) {
-//       crt.next = crt;
-//     } else {
-//       l3 = crt;
-//     }
-//   }
-//   return l3;
-// };
 
 const ipt1 = {
   val: 1,
