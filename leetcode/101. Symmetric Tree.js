@@ -34,35 +34,44 @@
  * @param {TreeNode} root
  * @return {boolean}
  */
+// var isSymmetric = function (root) {
+//   if (!root) return true;
+//   let arr = [root]
+//   let left = [];
+//   let right = [];
+//   while (left.length || right.length || arr.length) {
+//     const a = arr.shift();
+//     const l = left.shift() || null;
+//     const r = right.shift() || null;
+//     if (a) {
+//       if (a.left) {
+//         left.push(a.left);
+//       }
+//       if (a.right) {
+//         right.push(a.right);
+//       }
+//     } else {
+//       if (l && r) {
+//         if (l.val !== r.val) return false;
+//         left.push(l.left);
+//         left.push(l.right);
+//         right.push(r.right);
+//         right.push(r.left);
+//       } else {
+//         if (!(l === null && r === null)) return false;
+//       }
+//     }
+//   }
+//   return true;
+// };
 var isSymmetric = function (root) {
   if (!root) return true;
-  let arr = [root]
-  let left = [];
-  let right = [];
-  while (left.length || right.length || arr.length) {
-    const a = arr.shift();
-    const l = left.shift() || null;
-    const r = right.shift() || null;
-    if (a) {
-      if (a.left) {
-        left.push(a.left);
-      }
-      if (a.right) {
-        right.push(a.right);
-      }
-    } else {
-      if (l && r) {
-        if (l.val !== r.val) return false;
-        left.push(l.left);
-        left.push(l.right);
-        right.push(r.right);
-        right.push(r.left);
-      } else {
-        if (!(l === null && r === null)) return false;
-      }
-    }
+  function mirror(a, b) {
+    if (a == null && b == null) return true;
+    if (a == null || b == null) return false;
+    return a.val === b.val && mirror(a.left, b.right) && mirror(a.right, b.left);
   }
-  return true;
+  return mirror(root, root);
 };
 
 const ipt = {
