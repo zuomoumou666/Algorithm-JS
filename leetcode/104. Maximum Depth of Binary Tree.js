@@ -28,19 +28,47 @@
  * @param {TreeNode} root
  * @return {number}
  */
+// var maxDepth = function (root) {
+//   if (!root) return 0;
+//   function getDeep(root, deep) {
+//     let result = deep;
+//     if (root.left) {
+//       result = Math.max(result, getDeep(root.left, deep + 1));
+//     }
+//     if (root.right) {
+//       result = Math.max(result, getDeep(root.right, deep + 1));
+//     }
+//     return result;
+//   }
+//   return getDeep(root, 1);
+// };
+// var maxDepth = function (root) {
+//   if (!root) return 0;
+//   function getDeep(root, deep) {
+//     if (!root) return deep;
+//     return Math.max(getDeep(root.right, deep + 1), getDeep(root.left, deep + 1));
+//   }
+//   return getDeep(root, 0);
+// };
+// var maxDepth = function (root) {
+//   if (!root) return 0;
+//   return Math.max(maxDepth(root.left), maxDepth(root.right)) + 1;
+// };
 var maxDepth = function (root) {
   if (!root) return 0;
-  function getDeep(root, deep) {
-    let result = deep;
-    if (root.left) {
-      result = Math.max(result, getDeep(root.left, deep + 1));
+  const arr = [root];
+  let deep = 0;
+  while (arr.length !== 0) {
+    let len = arr.length;
+    deep++;
+    while (len) {
+      const cur = arr.shift();
+      len--;
+      if (cur.left) arr.push(cur.left);
+      if (cur.right) arr.push(cur.right);
     }
-    if (root.right) {
-      result = Math.max(result, getDeep(root.right, deep + 1));
-    }
-    return result;
   }
-  return getDeep(root, 1);
+  return deep;
 };
 
 
@@ -58,11 +86,12 @@ const root = {
   },
   right: {
     val: 3,
-    // left: {
-    //   val: 15,
-    // }, right: {
-    //   val: 7
-    // }
+    left: {
+      val: 15,
+    },
+    right: {
+      val: 7
+    }
   }
 }
 console.log(maxDepth(root));
