@@ -24,13 +24,26 @@
  * @param {number[]} nums2
  * @return {number[]}
  */
+// var intersect = function (nums1, nums2) {
+//   return nums1.filter(n1 => {
+//     for (let i = 0, len = nums2.length; i < len; i++) {
+//       if (nums2[i] === n1) {
+//         nums2.splice(i, 1);
+//         return true;
+//       }
+//     }
+//     return false;
+//   });
+// };
 var intersect = function (nums1, nums2) {
-  return nums1.filter(n1 => {
-    for (let i = 0, len = nums2.length; i < len; i++) {
-      if (nums2[i] === n1) {
-        nums2.splice(i, 1);
-        return true;
-      }
+  const map = {};
+  nums1.forEach(n1 => {
+    map[n1] = map[n1] ? map[n1] + 1 : 1;
+  });
+  return nums2.filter(n2 => {
+    if (map[n2] && map[n2] > 0) {
+      map[n2]--;
+      return true;
     }
     return false;
   });
@@ -39,3 +52,4 @@ var intersect = function (nums1, nums2) {
 const nums1 = [1, 2, 2, 1], nums2 = [2, 2];
 
 console.log(intersect(nums1, nums2));
+
