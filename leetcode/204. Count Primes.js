@@ -19,22 +19,20 @@ var countPrimes = function (n) {
   for (let i = 2; i < n; i++) {
     nums.push(i);
   }
-
-  for (let i = 2; i < n; i++) {
+  let cur = nums.splice(0, 1);
+  while (cur.length) {
+    cur = cur[0];
+    result.push(cur);
     for (let j = 0, len = nums.length; j < len; j++) {
-      const cur = nums[j];
-      if (cur === i) {
-        result.push(nums.splice(j, 1)[0]);
-        continue;
-      }
-      if (nums[j] / i % 1 === 0) {
+      if (nums[j] / cur % 1 === 0) {
         nums.splice(j, 1);
       }
     }
+    cur = nums.splice(0, 1);
   }
   return result.length;
 };
 
 console.time('z');
-console.log(countPrimes(499979));
+console.log(countPrimes(4999));
 console.timeEnd('z');
