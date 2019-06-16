@@ -14,25 +14,20 @@
  */
 var countPrimes = function (n) {
   if (n <= 1) return 0;
-  const nums = [];
-  const result = [];
+  const nums = new Array(n).fill(0);
+  let count = 0;
   for (let i = 2; i < n; i++) {
-    nums.push(i);
-  }
-  let cur = nums.splice(0, 1);
-  while (cur.length) {
-    cur = cur[0];
-    result.push(cur);
-    for (let j = 0, len = nums.length; j < len; j++) {
-      if (nums[j] / cur % 1 === 0) {
-        nums.splice(j, 1);
-      }
+    if (nums[i]) {
+      continue;
     }
-    cur = nums.splice(0, 1);
+    count++;
+    for (let j = i; j < n; j += i) {
+      nums[j] = true;
+    }
   }
-  return result.length;
+  return count;
 };
 
 console.time('z');
-console.log(countPrimes(4999));
+console.log(countPrimes(499949));
 console.timeEnd('z');
