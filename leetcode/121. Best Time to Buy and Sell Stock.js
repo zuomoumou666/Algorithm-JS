@@ -32,12 +32,23 @@
 //   }
 //   return profit;
 // };
+// var maxProfit = function (prices) {
+//   let min = Number.MAX_SAFE_INTEGER;
+//   let max = 0;
+//   for (let i = 0, len = prices.length; i < len; i++) {
+//     min = Math.min(min, prices[i]);
+//     max = Math.max(max, prices[i] - min);
+//   }
+//   return max;
+// };
 var maxProfit = function (prices) {
-  let min = Number.MAX_SAFE_INTEGER;
-  let max = 0
-  for (let i = 0, len = prices.length; i < len; i++) {
+  let min = Math.min(prices[0], Number.MAX_SAFE_INTEGER);
+  let max = 0;
+  const dp = [0]
+  for (let i = 1, len = prices.length; i < len; i++) {
     min = Math.min(min, prices[i]);
-    max = Math.max(max, prices[i] - min);
+    dp[i] = Math.max(dp[i - 1], prices[i] - min);
+    max = Math.max(dp[i], max);
   }
   return max;
 };
