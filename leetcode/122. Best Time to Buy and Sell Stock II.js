@@ -67,17 +67,31 @@
 //   }
 //   return profit;
 // };
+// var maxProfit = function (prices) {
+//   let profit = 0;
+//   let i = 1;
+//   let len = prices.length;
+//   while (i < len) {
+//     if (prices[i] >= prices[i - 1]) {
+//       profit += prices[i] - prices[i - 1];
+//     }
+//     i++;
+//   }
+//   return profit;
+// };
 var maxProfit = function (prices) {
-  let profit = 0;
+  let dp = [];
   let i = 1;
-  let len = prices.length;
-  while (i < len) {
-    if (prices[i] >= prices[i - 1]) {
-      profit += prices[i] - prices[i - 1];
-    }
+  while (i < prices.length) {
+    dp.push(prices[i] - prices[i - 1]);
     i++;
   }
-  return profit;
+  return dp.reduce((a, c) => {
+    if (c > 0) {
+      a += c;
+    }
+    return a;
+  }, 0);
 };
 // [0, -6, -2, -4, -1, -3];
 // [0, 0, 4, 2, 5, 3]
