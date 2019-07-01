@@ -21,16 +21,40 @@
  * @param {ListNode} head
  * @return {ListNode}
  */
+// var reverseList = function (head) {
+//   let pre = null;
+//   let cur = head;
+//   let temp;
+//   while (cur) {
+//     temp = cur.next;
+//     cur.next = pre;
+//     pre = cur;
+//     cur = temp;
+//   }
+//   return pre;
+// };
 var reverseList = function (head) {
-  let pre = null;
-  let cur = head;
-  let temp;
-  while (cur) {
-    temp = cur.next;
-    cur.next = pre;
-    pre = cur;
-    cur = temp;
+  let newHead = null;
+  let temp = null;
+  while (head) {
+    temp = head;
+    head = head.next;
+    temp.next = newHead;
+    newHead = temp;
   }
+  return newHead;
+};
+// var reverseList = function (head, pre) {
+//   if (!head) return head;
+//   let next = head.next;
+//   head.next = pre || null;
+//   return next ? reverseList(next, head) : head;
+// };
+var reverseList = function (head) {
+  if (!head || head.next === null) return head;
+  const pre = reverseList(head.next);
+  head.next.next = head;
+  head.next = null;
   return pre;
 };
 
