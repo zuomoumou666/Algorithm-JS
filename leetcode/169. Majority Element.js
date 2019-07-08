@@ -19,13 +19,16 @@
  * @param {number[]} nums
  * @return {number}
  */
+// var majorityElement = function (nums) {
+//   const haspMap = {};
+//   for (let i = 0, len = nums.length; i < len; i++) {
+//     const cur = nums[i];
+//     haspMap[cur] = haspMap[cur] ? haspMap[cur] + 1 : 1;
+//     if (haspMap[cur] > len / 2) return cur;
+//   }
+// };
 var majorityElement = function (nums) {
-  const haspMap = {};
-  for (let i = 0, len = nums.length; i < len; i++) {
-    const cur = nums[i];
-    haspMap[cur] = haspMap[cur] ? haspMap[cur] + 1 : 1;
-    if (haspMap[cur] > len / 2) return cur;
-  }
+  return nums.sort((a, b) => (a - b))[Math.floor(nums.length / 2)];
 };
 
 
