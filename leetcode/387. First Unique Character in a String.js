@@ -17,17 +17,29 @@
  * @param {string} s
  * @return {number}
  */
+// var firstUniqChar = function (s) {
+//   if (!s) return -1;
+//   const map = {};
+//   const arr = [];
+//   for (let i = 0, len = s.length; i < len; i++) {
+//     let cur = s[i];
+//     if (map[cur] === undefined) map[cur] = i;
+//     arr[map[cur]] = arr[map[cur]] + 1 || 1;
+//   }
+//   for (let j = 0, len = arr.length; j < len; j++) {
+//     if (arr[j] === 1) return j;
+//   }
+//   return -1;
+// };
 var firstUniqChar = function (s) {
   if (!s) return -1;
   const map = {};
-  const arr = [];
   for (let i = 0, len = s.length; i < len; i++) {
     let cur = s[i];
-    if (map[cur] === undefined) map[cur] = i;
-    arr[map[cur]] = arr[map[cur]] + 1 || 1;
+    map[cur] = map[cur] === undefined ? i : null;
   }
-  for (let j = 0, len = arr.length; j < len; j++) {
-    if (arr[j] === 1) return j;
+  for (let j in map) {
+    if (map[j] !== null) return map[j];
   }
   return -1;
 };
