@@ -19,11 +19,22 @@
  * @param {number[]} nums
  * @return {number}
  */
+// var missingNumber = function (nums) {
+//   nums.sort((a, b) => (a - b));
+//   for (let i = 0, len = nums.length; i <= len; i++) {
+//     if (nums[i] !== i) return i;
+//   }
+// };
 var missingNumber = function (nums) {
-  nums.sort((a, b) => (a - b));
-  for (let i = 0, len = nums.length; i < len; i++) {
-    if (nums[i] !== i) return i;
+  const hashMap = {};
+  let len = nums.length;
+  for (let i = 0; i < len; i++) {
+    hashMap[nums[i]] = true;
+  }
+
+  for (let i = 0; i <= len; i++) {
+    if (!hashMap[i]) return i;
   }
 };
 
-console.log(missingNumber([3, 0, 1]));
+console.log(missingNumber([0]));
