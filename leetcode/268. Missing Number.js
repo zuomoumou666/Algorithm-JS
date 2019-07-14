@@ -25,16 +25,21 @@
 //     if (nums[i] !== i) return i;
 //   }
 // };
-var missingNumber = function (nums) {
-  const hashMap = {};
-  let len = nums.length;
-  for (let i = 0; i < len; i++) {
-    hashMap[nums[i]] = true;
-  }
+// var missingNumber = function (nums) {
+//   const hashMap = {};
+//   let len = nums.length;
+//   for (let i = 0; i < len; i++) {
+//     hashMap[nums[i]] = true;
+//   }
 
-  for (let i = 0; i <= len; i++) {
-    if (!hashMap[i]) return i;
-  }
+//   for (let i = 0; i <= len; i++) {
+//     if (!hashMap[i]) return i;
+//   }
+// };
+var missingNumber = function (nums) {
+  const len = nums.length;
+  let sum = len * (len + 1) / 2;
+  return sum - nums.reduce((a, c) => (a + c), 0);
 };
 
 console.log(missingNumber([0]));
