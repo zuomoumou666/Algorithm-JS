@@ -35,12 +35,12 @@
 //   return false;
 // };
 var hasCycle = function (head) {
-  if (!head || !head.next) return false;
-  let next = head.next.next;
-  while (head && next && next.next) {
-    if (head === next) return true;
+  if (!head) return false;
+  let runner = head;
+  while (head && runner.next && runner.next.next) {
+    if (head.next === runner.next.next) return true;
     head = head.next;
-    next = next.next.next;
+    runner = runner.next.next;
   }
   return false;
 };
