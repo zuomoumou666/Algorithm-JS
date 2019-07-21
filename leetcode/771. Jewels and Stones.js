@@ -23,17 +23,21 @@
  * @param {string} S
  * @return {number}
  */
+// var numJewelsInStones = function (J, S) {
+//   let result = 0;
+//   if (!J || !S) return result;
+//   const hashMap = {};
+//   for (let i = 0, len = J.length; i < len; i++) {
+//     hashMap[J[i]] = true;
+//   }
+//   for (let i = 0, len = S.length; i < len; i++) {
+//     if (hashMap[S[i]]) result += 1;
+//   }
+//   return result;
+// };
 var numJewelsInStones = function (J, S) {
-  let result = 0;
-  if (!J || !S) return result;
-  const hashMap = {};
-  for (let i = 0, len = J.length; i < len; i++) {
-    hashMap[J[i]] = true;
-  }
-  for (let i = 0, len = S.length; i < len; i++) {
-    if (hashMap[S[i]]) result += 1;
-  }
-  return result;
+  const jewels = J.split('');
+  return S.split('').reduce((a, c) => (jewels.includes(c) ? a + 1 : a), 0);
 };
 const J = "aA";
 const S = "aAAbbbb";
