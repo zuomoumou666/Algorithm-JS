@@ -26,26 +26,33 @@
  * @param {number[]} arr2
  * @return {number[]}
  */
+// var relativeSortArray = function (arr1, arr2) {
+//   const hash = {};
+//   arr2.forEach((v, i) => {
+//     hash[v] = i;
+//   });
+
+//   return arr1.sort((a, b) => {
+//     if (hash[a] !== undefined && hash[b] !== undefined) {
+//       return hash[a] - hash[b];
+//     }
+//     if (hash[a] !== undefined) {
+//       return -1;
+//     }
+//     if (hash[b] !== undefined) {
+//       return 1;
+//     }
+//     return a - b;
+//   });
+// };
 var relativeSortArray = function (arr1, arr2) {
   const hash = {};
   arr2.forEach((v, i) => {
     hash[v] = i;
   });
-
-  return arr1.sort((a, b) => {
-    if (hash[a] !== undefined && hash[b] !== undefined) {
-      return hash[a] - hash[b];
-    }
-    if (hash[a] !== undefined) {
-      return -1;
-    }
-    if (hash[b] !== undefined) {
-      return 1;
-    }
-    return a - b;
-  });
+  const getValue = (v) => hash[v] === undefined ? 1000 + v : hash[v];
+  return arr1.sort((a, b) => getValue(a) - getValue(b));
 };
-
 
 const arr1 = [2, 3, 1, 3, 2, 4, 6, 7, 9, 2, 19];
 const arr2 = [2, 1, 4, 3, 9, 6];
