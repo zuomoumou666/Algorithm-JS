@@ -37,9 +37,22 @@
  * @param {string[]} emails
  * @return {number}
  */
+// var numUniqueEmails = function (emails) {
+//   const hashMap = {};
+//   emails.forEach(email => {
+//     const [local, domain] = email.split('@');
+//     let str = '';
+//     for (let i = 0, len = local.length; i < len; i++) {
+//       const cur = local[i];
+//       if (cur === '+') break;
+//       if (local[i] !== '.') str += local[i];
+//     }
+//     hashMap[`${str}@${domain}`] = true;
+//   });
+//   return Object.keys(hashMap).length;
+// };
 var numUniqueEmails = function (emails) {
-  const hashMap = {};
-  emails.forEach(email => {
+  const arr = emails.map(email => {
     const [local, domain] = email.split('@');
     let str = '';
     for (let i = 0, len = local.length; i < len; i++) {
@@ -47,10 +60,12 @@ var numUniqueEmails = function (emails) {
       if (cur === '+') break;
       if (local[i] !== '.') str += local[i];
     }
-    hashMap[`${str}@${domain}`] = true;
+    return `${str}@${domain}`;
   });
-  return Object.keys(hashMap).length;
+  return (new Set(arr)).size;
 };
+
+//TODO: use regex
 
 const ipt = ["test.email+alex@leetcode.com", "test.e.mail+bob.cathy@leetcode.com", "testemail+david@lee.tcode.com"];
 
