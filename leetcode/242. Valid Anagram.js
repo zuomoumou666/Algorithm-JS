@@ -22,7 +22,21 @@
  * @param {string} t
  * @return {boolean}
  */
+// var isAnagram = function (s, t) {
+//   const sort = (str) => str.split('').sort().join("");
+//   return sort(s) === sort(t);
+// };
 var isAnagram = function (s, t) {
-  const sort = (str) => str.split('').sort().join("");
-  return sort(s) === sort(t);
+  const lenS = s.length;
+  const lenT = t.length;
+  if (lenS !== lenT) return false;
+  const map = {};
+  for (let i = 0; i < lenS; i += 1) {
+    map[s[i]] = (map[s[i]] || 0) + 1;
+  }
+  for (let i = 0; i < lenT; i += 1) {
+    if (!map[t[i]]) return false;
+    map[t[i]]--;
+  }
+  return true;
 };
