@@ -44,32 +44,38 @@
  */
 var calPoints = function (ops) {
   let len = ops.length;
-  if (!ops || !len) return 0;
+  let sum = 0;
+  if (!ops || !len) return sum;
   const points = [];
   let last;
   let pre;
+  let cur;
   for (let i = 0; i < ops.length; i++) {
+    let index = points.length - 1;
     switch (ops[i]) {
       case 'D':
-        last = points.pop();
-        points.push(last * 2);
+        last = points[index];
+        cur = last * 2;
+        points.push(cur);
         break;
       case 'C':
-        points.pop();
+        cur = -points.pop();
         break;
       case '+':
-        let index = points.length - 1;
         last = points[index] || 0;
         pre = points[index - 1] || 0;
-        points.push(last + pre);
+        cur = last + pre;
+        points.push(cur);
         break;
       default:
-        points.push(parseInt(ops[i], 10));
+        cur = parseInt(ops[i], 10);
+        points.push(cur);
         break;
     }
-    console.log(points);
+    sum += cur;
+    // console.log(points, sum);
   }
-  return points.reduce((pre, cur) => (pre + cur), 0);
+  return sum;
 };
 const testCase = ["5", "-2", "4", "C", "D", "9", "+", "+"];
 // const testCase = ["5", "2", "C", "D", "+"];
