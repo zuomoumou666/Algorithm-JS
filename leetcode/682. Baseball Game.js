@@ -46,37 +46,64 @@ var calPoints = function (ops) {
   let len = ops.length;
   let sum = 0;
   if (!ops || !len) return sum;
-  const points = [];
-  let last;
-  let pre;
-  let cur;
   for (let i = 0; i < ops.length; i++) {
-    let index = points.length - 1;
     switch (ops[i]) {
       case 'D':
-        last = points[index];
-        cur = last * 2;
-        points.push(cur);
+        ops[i] = ops[i - 1] * 2;
+        sum += ops[i];
         break;
       case 'C':
-        cur = -points.pop();
+        sum -= ops[i - 1];
+        ops.splice(i - 1, 2);
+        i -= 2;
         break;
       case '+':
-        last = points[index] || 0;
-        pre = points[index - 1] || 0;
-        cur = last + pre;
-        points.push(cur);
+        ops[i] = ops[i - 2] + ops[i - 1];
+        sum += ops[i];
         break;
       default:
-        cur = parseInt(ops[i], 10);
-        points.push(cur);
+        ops[i] = Number(ops[i]);
+        sum += ops[i];
         break;
     }
-    sum += cur;
-    // console.log(points, sum);
   }
   return sum;
 };
+// var calPoints = function (ops) {
+//   let len = ops.length;
+//   let sum = 0;
+//   if (!ops || !len) return sum;
+//   const points = [];
+//   let last;
+//   let pre;
+//   let cur;
+//   for (let i = 0; i < ops.length; i++) {
+//     let index = points.length - 1;
+//     switch (ops[i]) {
+//       case 'D':
+//         last = points[index];
+//         cur = last * 2;
+//         points.push(cur);
+//         break;
+//       case 'C':
+//         cur = -points.pop();
+//         break;
+//       case '+':
+//         last = points[index] || 0;
+//         pre = points[index - 1] || 0;
+//         cur = last + pre;
+//         points.push(cur);
+//         break;
+//       default:
+//         cur = parseInt(ops[i], 10);
+//         points.push(cur);
+//         break;
+//     }
+//     sum += cur;
+//     // console.log(points, sum);
+//   }
+//   return sum;
+// };
 const testCase = ["5", "-2", "4", "C", "D", "9", "+", "+"];
 // const testCase = ["5", "2", "C", "D", "+"];
 console.log(calPoints(testCase));
