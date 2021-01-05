@@ -40,16 +40,25 @@
  * @param {number} x
  * @return {boolean}
  */
+// var isPalindrome = function (x) {
+//   const str = `${x}`;
+//   let start = 0, end = str.length - 1;
+//   while (start < end) {
+//     if (str[start] !== str[end]) return false;
+//     start++;
+//     end--;
+//   }
+//   return true;
+// };
+
 var isPalindrome = function (x) {
-  const str = `${x}`;
-  let start = 0, end = str.length - 1;
-  while (start < end) {
-    if (str[start] !== str[end]) return false;
-    start++;
-    end--;
+  if (x < 0) return false
+  let rev = 0
+  for (let i = x; i >= 1; i = Math.floor(i / 10)) {
+    rev = rev * 10 + i % 10
   }
-  return true;
+  return rev === x
 };
 
 
-console.log(isPalindrome(1234321));
+console.log(isPalindrome(12343215));
