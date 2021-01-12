@@ -38,11 +38,29 @@
  * @param {TreeNode} root
  * @return {number}
  */
-var minDepth = function(root) {
-  if (root === null) return 0;
-  if (root.left === null) return minDepth(root.right) + 1;
-  if (root.right === null) return minDepth(root.left) + 1;
-  return Math.min( minDepth(root.left), minDepth(root.right) ) + 1;
+// var minDepth = function (root) {
+//   if (root === null) return 0;
+//   if (root.left === null) return minDepth(root.right) + 1;
+//   if (root.right === null) return minDepth(root.left) + 1;
+//   return Math.min(minDepth(root.left), minDepth(root.right)) + 1;
+// };
+var minDepth = function (root) {
+  let depth = 1;
+  if (root === null) return depth;
+  const arr = [root];
+  let len = arr.length;
+  while (arr.length) {
+    const node = arr.shift();
+    len--;
+    if (node.left) arr.push(node.left);
+    if (node.right) arr.push(node.right);
+    if (!node.left && !node.right) return depth;
+    if (len === 0) {
+      len = arr.length;
+      depth++;
+    }
+  }
+  return depth;
 };
 
 function TreeNode(val, left, right) {
@@ -60,16 +78,16 @@ const root = new TreeNode(
     new TreeNode(
       3,
       new TreeNode(4),
-      new TreeNode(4),
+      // new TreeNode(4),
     ),
-    new TreeNode(3),
+    // new TreeNode(3),
   ),
-  new TreeNode(
-    2,
-    new TreeNode(3),
-    null,
-  ),
+  // new TreeNode(
+  //   2,
+  //   new TreeNode(3),
+  //   null,
+  // ),
 );
 
 
-console.log(getMinDepth(root, 1));
+console.log(minDepth(root));
