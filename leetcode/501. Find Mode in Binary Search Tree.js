@@ -45,19 +45,47 @@
  * @param {TreeNode} root
  * @return {number[]}
  */
+// var findMode = function (root) {
+//   if (!root) return [];
+//   const map = {};
+//   const arr = [root];
+//   let most = 0;
+//   let result = [];
+//   while (arr.length) {
+//     const node = arr.shift();
+//     map[node.val] = map[node.val] ? map[node.val] + 1 : 1;
+//     if (map[node.val] > most) {
+//       most = map[node.val];
+//       result = [node.val];
+//     } else if (map[node.val] === most) {
+//       result.push(node.val);
+//     }
+//     if (node.left) arr.push(node.left);
+//     if (node.right) arr.push(node.right);
+//   }
+//   return result;
+// };
 var findMode = function (root) {
   if (!root) return [];
-  const map = {};
-  const arr = [root];
-  let most = 0;
-  while (arr.length) {
-    const node = arr.shift();
-    map[node.val] = map[node.val] ? map[node.val] + 1 : 1;
-    most = Math.max(most, map[node.val]);
-    if (node.left) arr.push(node.left);
-    if (node.right) arr.push(node.right);
-  }
-  return Object.keys(map).filter(k => map[k] === most);
+  let count = 0;
+  let max = -Infinity;
+  let cur;
+  let result = [];
+  const inOrder = (node) => {
+    if (!node) return;
+    inOrder(node.left);
+    count = cur === node.val ? count + 1 : 1;
+    cur = node.val;
+    if (count > max) {
+      result = [node.val];
+      max = count;
+    } else if (max === count) {
+      result.push(node.val);
+    }
+    inOrder(node.right);
+  };
+  inOrder(root);
+  return result;
 };
 
 function TreeNode(val, left, right) {
@@ -66,4 +94,13 @@ function TreeNode(val, left, right) {
   this.right = (right === undefined ? null : right)
 }
 
-const root = new TreeNode()
+const root = new TreeNode(
+  1,
+  null,
+  new TreeNode(
+    2,
+    new TreeNode(2)
+  )
+)
+
+console.log(findMode(root));
