@@ -60,9 +60,7 @@ var longestPalindrome = function (s) {
       n += 2;
     }
   }
-  if (Object.values(map).some(i => i === 1)) {
-    n += 1;
-  }
+  if (s.length > n) n += 1;
   return n;
 };
 
