@@ -36,20 +36,31 @@
  * @param {number[]} nums
  * @return {number}
  */
+// var thirdMax = function (nums) {
+//   nums.sort((a, b) => a - b);
+//   let count = 1;
+//   let len = nums.length - 2;
+//   while (len >= 0) {
+//     if (nums[len] < nums[len + 1]) {
+//       count++;
+//       if (count === 3) {
+//         return nums[len];
+//       }
+//     }
+//     len--;
+//   }
+//   return nums[nums.length - 1];
+// };
 var thirdMax = function (nums) {
-  nums.sort((a, b) => a - b);
-  let count = 1;
-  let len = nums.length - 2;
-  while (len >= 0) {
-    if (nums[len] < nums[len + 1]) {
-      count++;
-      if (count === 3) {
-        return nums[len];
-      }
-    }
-    len--;
+  if (nums.length < 3) return Math.max(...nums);
+  let u = new Set(nums)
+  if (u.size < 3) return Math.max(...u);
+
+  for (let i = 0; i < 2; i++) {
+    u.delete(Math.max(...u))
   }
-  return nums[nums.length - 1];
+
+  return Math.max(...u);
 };
 
 // const nums = [3, 2, 1];
