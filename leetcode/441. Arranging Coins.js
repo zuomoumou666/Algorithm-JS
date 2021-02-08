@@ -33,17 +33,48 @@
  * @param {number} n
  * @return {number}
  */
+// var arrangeCoins = function (n) {
+//   let count = 0;
+//   for (let i = 1; i <= n && n > 0; i++) {
+//     n -= i;
+//     if (n >= 0) {
+//       count++;
+//     }
+//   }
+//   return count;
+// };
+
+
+// var arrangeCoins = function (n) {
+//   let left = 1, right = n;
+//   let k, curr;
+//   while (left <= right) {
+//     k = left + ((right - left) >> 1);
+//     curr = k * (k + 1) / 2;
+//     if (curr <= n && ((k + 1) * (k + 2) > 2 * n)) return k;
+//     if (curr <= n) {
+//       left = k + 1;
+//     } else {
+//       right = k - 1;
+//     }
+//   }
+//   return 0;
+// };
+
 var arrangeCoins = function (n) {
-  let count = 0;
-  for (let i = 1; i <= n && n > 0; i++) {
-    n -= i;
-    if (n >= 0) {
-      count++;
+  let left = 0, right = n;
+  let k, curr;
+  while (left <= right) {
+    k = left + ((right - left) >> 1);
+    curr = k * (k + 1) / 2;
+    if (curr === n) return k;
+    if (curr < n) {
+      left = k + 1;
+    } else {
+      right = k - 1;
     }
   }
-  return count;
+  return right;
 };
 
-
-
-console.log(arrangeCoins(8));
+console.log(arrangeCoins(5));
