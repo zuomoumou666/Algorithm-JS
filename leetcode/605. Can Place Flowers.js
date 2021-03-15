@@ -36,7 +36,7 @@ var canPlaceFlowers = function (flowerbed, n) {
   for (let i = 0; i < flowerbed.length; i++) {
     const cur = flowerbed[i];
     if (cur === 0 && flowerbed[i - 1] !== 1 && flowerbed[i + 1] !== 1) {
-      flowerbed[i] = 1;
+      i++;
       n--;
     }
     if (n === 0) return true;
