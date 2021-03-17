@@ -43,33 +43,45 @@
  * @param {number[][]} indices
  * @return {number}
  */
+// var oddCells = function (m, n, indices) {
+//   const matrix = Array.from(Array(m), () => new Array(n).fill(0));
+//   let count = 0;
+//   const calc = (num) => {
+//     if (num % 2 === 0) {
+//       count--;
+//     } else {
+//       count++;
+//     }
+//   };
+//   for (let i = 0; i < indices.length; i++) {
+//     const [r, c] = indices[i];
+//     matrix[r] = matrix[r].map(item => {
+//       const newItem = item + 1;
+//       calc(newItem);
+//       return newItem;
+//     });
+//     for (let j = 0; j < m; j++) {
+//       calc(++matrix[j][c]);
+//     }
+//   }
+//   return count;
+// };
+
 var oddCells = function (m, n, indices) {
-  const matrix = Array.from(Array(m), () => new Array(n).fill(0));
-  let count = 0;
-  const calc = (num) => {
-    if (num % 2 === 0) {
-      count--;
-    } else {
-      count++;
-    }
-  };
-  for (let i = 0; i < indices.length; i++) {
-    const [r, c] = indices[i];
-    matrix[r] = matrix[r].map(item => {
-      const newItem = item + 1;
-      calc(newItem);
-      return newItem;
-    });
-    for (let j = 0; j < m; j++) {
-      calc(++matrix[j][c]);
-    }
-  }
-  return count;
+  const rows = new Array(m).fill(0);
+  const columns = new Array(n).fill(0);
+  indices.forEach(([r, c]) => {
+    ++rows[r];
+    ++columns[c];
+  });
+  const countR = rows.reduce((p, c) => (p + c % 2), 0);
+  const countC = columns.reduce((p, c) => (p + c % 2), 0);
+  return countR * n + countC * m - 2 * countR * countC;
 };
 
-// const m = 2, n = 3, indices = [[0,1],[1,1]];
+const m = 2, n = 3, indices = [[0, 1], [1, 1]];
 // Output: 6
- const m = 2, n = 2, indices = [[1,1],[0,0]];
+// const m = 2, n = 2, indices = [[1, 1], [0, 0]];
 // Output: 0
 
 console.log(oddCells(m, n, indices));
