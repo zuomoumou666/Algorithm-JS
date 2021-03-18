@@ -46,23 +46,34 @@
  * @param {number[][]} pieces
  * @return {boolean}
  */
+// var canFormArray = function (arr, pieces) {
+//   let count = 0;
+//   while (pieces.length) {
+//     const piece = pieces.pop();
+//     const index = arr.findIndex(a => a === piece[0]);
+//     if (index < 0) return false;
+//     count++;
+//     for (let i = 1; i < piece.length; i++) {
+//       if (piece[i] !== arr[index + i]) return false;
+//       count++;
+//     }
+//   }
+//   return arr.length === count;
+// };
 var canFormArray = function (arr, pieces) {
-  let count = 0;
+  let total = '';
+  arr = arr.join('');
   while (pieces.length) {
-    const piece = pieces.pop();
-    const index = arr.findIndex(a => a === piece[0]);
+    const piece = pieces.pop().join('');
+    const index = arr.indexOf(piece);
     if (index < 0) return false;
-    count++;
-    for (let i = 1; i < piece.length; i++) {
-      if (piece[i] !== arr[index + i]) return false;
-      count++;
-    }
+    total += piece;
   }
-  return arr.length === count;
+  return arr.length === total.length;
 };
 
 
-const arr = [85], pieces = [[85]];
+// const arr = [85], pieces = [[85]];
 // Output: true
 // const arr = [15, 88], pieces = [[88], [15]];
 // Output: true
@@ -73,7 +84,7 @@ const arr = [85], pieces = [[85]];
 // const arr = [1, 3, 5, 7], pieces = [[2, 4, 6, 8]];
 // Output: false
 
-// const arr = [10, 15, 20];
-// const pieces = [[10, 20], [15]];
+const arr = [10, 15, 20];
+const pieces = [[10, 20], [15]];
 
 console.log(canFormArray(arr, pieces));
