@@ -54,11 +54,11 @@ var checkStraightLine = function (coordinates) {
 
 
 
-const coordinates = [[1, 2], [2, 3], [3, 4], [4, 5], [5, 6], [6, 7]];
+// const coordinates = [[1, 2], [2, 3], [3, 4], [4, 5], [5, 6], [6, 7]];
 // Output: true
 // const coordinates = [[1, 1], [2, 2], [3, 4], [4, 5], [5, 6], [7, 7]];
 // Output: false
-// const coordinates = [[0, 0], [0, 1], [0, -1]];
+const coordinates = [[0, 0], [0, 1], [0, -1]];
 // true
 // const coordinates = [[2, 4], [2, 5], [2, 8]]
 // true
