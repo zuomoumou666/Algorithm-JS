@@ -60,38 +60,33 @@ var minSteps = function (n) {
   }
 };
 
-// 1,0
-// 2,2
-// 3,3
-// 4,4
-// 5,5
-// 6,5
-// 1,0
-// 2,2
-// 3,3
-// 4,4
-// 6,5
-// 7,7
-// 8,6
+var minSteps = function (n) {
+  const dp = new Array(n + 1).fill(0);
+  dp[0] = 0;
+  dp[1] = 0;
+  for (let i = 2; i <= n; i++) {
+    dp[i] = i;
+    for (let j = Math.floor(i / 2); j >= 1; j--) {
+      if (i % j === 0) {
+        dp[i] = dp[j] + (i / j);
+        break;
+      }
+    }
+  }
+  return dp[n];
+};
+
+// O(log(n))
+var minSteps = function (n) {
+  let s = 0;
+  for (let d = 2; d <= n; d++) {
+    while (n % d == 0) {
+      s += d;
+      n /= d;
+    }
+  }
+  return s;
+};
 
 
-
-// 12,7
-// 14,9
-// 16,8
-// dp[4] = dp[2] + 2 = 4;
-// dp[5] = dp[3] + dp[2] = 5;
-// d[6] = d[5] + 2;
-// dp[9] = dp[4] + dp[5] = 9???
-// d[n] = Min(d[n-1] + 2, d[n/2]*n/2);
-// d[9] = d[8] + 2;
-// d[8] = d[6] + 2;
-// d[6] = d[5] + 2;
-// d[6] = d[5] + 2;
-// var minSteps = function (n) {
-
-// };
-
-
-
-console.log(minSteps(99));
+console.log(minSteps(9));
