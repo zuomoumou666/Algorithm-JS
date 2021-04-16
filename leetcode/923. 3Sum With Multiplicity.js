@@ -72,20 +72,26 @@
 //   return count;
 // };
 var threeSumMulti = function (arr, target) {
-  const map = new Map();
-  const mod = 1000000007;
-  let res = 0;
-
-  for (let i = 0; i < arr.length; i++) {
-    res = (res + (map.get(target - arr[i]) || 0)) % mod;
-
-    for (let j = 0; j < i; j++) {
-      let temp = arr[i] + arr[j];
-      map.set(temp, (map.get(temp) || 0) + 1);
+  const map = new Array(101).fill(0), mod = 1000000007, third = target / 3;
+  arr.forEach(i => map[i]++);
+  let count = 0;
+  for (let k = Math.min(target, 100); k >= third; k--) {
+    const rem = target - k, half = rem / 2;
+    for (let j = Math.min(rem, k); j >= half; j--) {
+      let i = rem - j, x = map[i], y = map[j], z = map[k], res;
+      if (i === k) {
+        res = x * (x - 1) * (x - 2) / 6
+      } else if (i === j) {
+        res = x * (x - 1) / 2 * z;
+      } else if (j === k) {
+        res = x * y * (y - 1) / 2;
+      } else {
+        res = x * y * z;
+      }
+      count = (count + res) % mod;
     }
   }
-
-  return res;
+  return count;
 };
 
 
